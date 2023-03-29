@@ -7,6 +7,14 @@ class KelimelerSpider(scrapy.Spider):
     user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.54'
 
     def __init__(self):
+        """
+        The __init__ function is called when the class is instantiated.
+        It sets up the instance of the class, and defines any variables that will be used
+        by other functions in the class.
+
+        :param self: Represent the instance of the class
+        :return: The base url of the website
+        """
         self.base_url = 'https://kelimeler.net'
 
     def start_requests(self):
