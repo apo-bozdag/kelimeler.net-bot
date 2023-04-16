@@ -1,4 +1,27 @@
 import scrapy
+import re
+
+
+def tr_upper(self):
+    self = re.sub(r"i", "İ", self)
+    self = re.sub(r"ı", "I", self)
+    self = re.sub(r"ç", "Ç", self)
+    self = re.sub(r"ş", "Ş", self)
+    self = re.sub(r"ü", "Ü", self)
+    self = re.sub(r"ğ", "Ğ", self)
+    self = self.upper()  # for the rest use default upper
+    return self
+
+
+def tr_lower(self):
+    self = re.sub(r"İ", "i", self)
+    self = re.sub(r"I", "ı", self)
+    self = re.sub(r"Ç", "ç", self)
+    self = re.sub(r"Ş", "ş", self)
+    self = re.sub(r"Ü", "ü", self)
+    self = re.sub(r"Ğ", "ğ", self)
+    self = self.lower()  # for the rest use default lower
+    return self
 
 
 class KelimelerSpider(scrapy.Spider):
@@ -28,9 +51,10 @@ class KelimelerSpider(scrapy.Spider):
         :param self: Represent the instance of the class
         :return: An iterable object, which is a list of requests
         """
+        letters = 'abcçdefgğhıijklmnoöprsştuüvyz'
         urls = [
             'https://kelimeler.net/%s-ile-baslayan-kelimeler' % chr(i) for i in
-            range(ord('a'), ord('z') + 1)
+            [ord(c) for c in letters]
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
@@ -85,7 +109,7 @@ class KelimelerSpider(scrapy.Spider):
             questions.append(word.css('::text').get().strip())
         yield {
             'answer': answer,
-            'letter': answer[0].lower(),
+            'letter': tr_lower(answer[0]),
             'question': questions,
             'url': response.url
         }
