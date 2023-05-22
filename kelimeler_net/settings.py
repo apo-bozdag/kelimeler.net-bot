@@ -12,6 +12,10 @@ BOT_NAME = "kelimeler_net"
 SPIDER_MODULES = ["kelimeler_net.spiders"]
 NEWSPIDER_MODULE = "kelimeler_net.spiders"
 
+FEED_EXPORTERS = {
+    'xlsx': 'scrapy_xlsx.XlsxItemExporter',
+}
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "kelimeler_net (+http://www.yourdomain.com)"

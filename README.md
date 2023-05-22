@@ -11,3 +11,9 @@ pip install -r requirements.txt
 ```bash
 scrapy crawl kelimeler -O questions.json
 ```
+```bash
+scrapy crawl bulurum -a what=eczane -a where=izmir -o bulurum.csv
+```
+```bash
+scrapy crawl bulurum -a what=eczane -a where=izmir -o bulurum.xlsx
+```
